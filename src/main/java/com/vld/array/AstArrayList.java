@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 
+
 public class AstArrayList<E> implements AstArrayListImp<E> {
 
     private int capacity = 10;
@@ -25,9 +26,9 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        Object[]o = c.toArray();
+        Object[] o = c.toArray();
         for (int i = 0; i < c.size(); i++) {
-add(size, (E) o[i]);
+            add(size, (E) o[i]);
         }
         return true;
     }
@@ -78,23 +79,17 @@ add(size, (E) o[i]);
 
     @Override
     public void sort(Comparator<? super E> c) {
-
+        quickSortInPlace(array, c, 0, size() - 1);
     }
 
     public int size() {
-        int n = 0;
-        for (Object a : array) {
-            if (a != null) {
-                n++;
-            }
-        }
-        size = n;
         return size;
     }
 
     private void growCapacity() {
         int newCapacity = array.length * 3 / 2 + 1;
         array = Arrays.copyOf(array, newCapacity);
+        capacity = newCapacity;
     }
 
     private void checkIndexWithEqual(int index) {
@@ -115,5 +110,33 @@ add(size, (E) o[i]);
         }
         size--;
         array[size] = null;
+    }
+
+    private <E> void quickSortInPlace(Object[] S, Comparator<E> comp, int a,
+                                      int b) {
+        if (a >= b)
+            return;
+        int left = a;
+        int right = b - 1;
+        E pivot = (E) S[b];
+        E temp;
+        while (left <= right) {
+            while (left <= right && comp.compare((E) S[left], pivot) < 0)
+                left++;
+            while (left <= right && comp.compare((E) S[right], pivot) > 0)
+                right--;
+            if (left <= right) {
+                temp = (E) S[left];
+                S[left] = S[right];
+                S[right] = temp;
+                left++;
+                right--;
+            }
+        }
+        temp = (E) S[left];
+        S[left] = S[b];
+        S[b] = temp;
+        quickSortInPlace(S, comp, a, left - 1);
+        quickSortInPlace(S, comp, left + 1, b);
     }
 }
