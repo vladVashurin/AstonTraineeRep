@@ -26,7 +26,6 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
         }
         array[index] = element;
         size++;
-        System.out.println(capacity);
         return true;
     }
 
