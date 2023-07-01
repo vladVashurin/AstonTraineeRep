@@ -14,7 +14,7 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
 
     @Override
     public boolean add(E element) {
-        return true;
+        return false;
     }
 
     @Override
