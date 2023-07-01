@@ -13,6 +13,11 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
 
 
     @Override
+    public boolean add(E element) {
+        return true;
+    }
+
+    @Override
     public boolean add(int index, E element) {
         checkIndexWithoutEqual(index);
         growCapacity();
@@ -21,6 +26,7 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
         }
         array[index] = element;
         size++;
+        System.out.println(capacity);
         return true;
     }
 
@@ -87,6 +93,8 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
     }
 
     private void growCapacity() {
+        if (capacity <= size * 100 / 75) {
+        } else return;
         int newCapacity = array.length * 3 / 2 + 1;
         array = Arrays.copyOf(array, newCapacity);
         capacity = newCapacity;
