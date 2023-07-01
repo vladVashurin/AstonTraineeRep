@@ -24,7 +24,7 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
         for (int i = size - 1; i >= index; i--) {
             array[i + 1] = array[i];
         }
-        array[index] = element;
+        array[index] = elements;
         size++;
         return true;
     }
