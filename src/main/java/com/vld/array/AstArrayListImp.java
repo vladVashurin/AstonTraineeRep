@@ -1,9 +1,9 @@
-package org.example;
+package com.vld.array;
 
 import java.util.Collection;
 import java.util.Comparator;
 
-public interface VlArrayListImp<E> {
+public interface AstArrayListImp<E> {
     boolean add(int index, E element);
 
     boolean addAll(Collection<? extends E> c);
