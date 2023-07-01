@@ -14,7 +14,10 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
 
     @Override
     public boolean add(E element) {
-        return false;
+        growCapacity();
+        array[size] = element;
+        size++;
+        return true;
     }
 
     @Override
@@ -84,7 +87,7 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
 
     @Override
     public void sort(Comparator<? super E> c) {
-        quickSortInPlace(array, c, 0, size() - 1);
+        quickSort(array, c, 0, size() - 1);
     }
 
     public int size() {
@@ -119,7 +122,7 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
         array[size] = null;
     }
 
-    private <E> void quickSortInPlace(Object[] S, Comparator<E> comp, int a,
+    private <E> void quickSort(Object[] S, Comparator<E> comp, int a,
                                       int b) {
         if (a >= b)
             return;
@@ -143,7 +146,7 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
         temp = (E) S[left];
         S[left] = S[b];
         S[b] = temp;
-        quickSortInPlace(S, comp, a, left - 1);
-        quickSortInPlace(S, comp, left + 1, b);
+        quickSort(S, comp, a, left - 1);
+        quickSort(S, comp, left + 1, b);
     }
 }
