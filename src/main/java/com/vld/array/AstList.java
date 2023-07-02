@@ -3,7 +3,7 @@ package com.vld.array;
 import java.util.Collection;
 import java.util.Comparator;
 
-public interface AstArrayListImp<E> {
+public interface AstList<E> {
 
     boolean add(E element);
     boolean add(int index, E element);

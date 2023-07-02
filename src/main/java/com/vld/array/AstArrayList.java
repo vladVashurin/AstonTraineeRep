@@ -1,11 +1,10 @@
 package com.vld.array;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
+import java.util.*;
+import java.util.function.Consumer;
 
 
-public class AstArrayList<E> implements AstArrayListImp<E> {
+public class AstArrayList<E> implements AstList<E>{
 
     private int capacity = 10;
     private Object[] array = new Object[capacity];
@@ -123,7 +122,7 @@ public class AstArrayList<E> implements AstArrayListImp<E> {
     }
 
     private <E> void quickSort(Object[] S, Comparator<E> comp, int a,
-                                      int b) {
+                               int b) {
         if (a >= b)
             return;
         int left = a;
