@@ -1,7 +1,6 @@
 package com.vld.array;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 
 public class AstArrayList<E> implements AstList<E>{
