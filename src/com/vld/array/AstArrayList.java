@@ -3,7 +3,7 @@ package com.vld.array;
 import java.util.*;
 
 
-public class AstArrayList<E> implements AstList<E>{
+public class AstArrayList<E> implements AstList<E> {
 
     private int capacity = 10;
     private Object[] array = new Object[capacity];
@@ -22,9 +22,7 @@ public class AstArrayList<E> implements AstList<E>{
     public boolean add(int index, E element) {
         checkIndexWithoutEqual(index);
         growCapacity();
-        for (int i = size - 1; i >= index; i--) {
-            array[i + 1] = array[i];
-        }
+        System.arraycopy(array, index, array, index + 1, size - index);
         array[index] = element;
         size++;
         return true;
@@ -93,11 +91,15 @@ public class AstArrayList<E> implements AstList<E>{
     }
 
     private void growCapacity() {
-        if (capacity <= size * 100 / 75) {
-        } else return;
-        int newCapacity = array.length * 3 / 2 + 1;
-        array = Arrays.copyOf(array, newCapacity);
-        capacity = newCapacity;
+        if (checkCapacity()) {
+            int newCapacity = array.length * 3 / 2 + 1;
+            array = Arrays.copyOf(array, newCapacity);
+            capacity = newCapacity;
+        }
+    }
+
+    private boolean checkCapacity() {
+        return capacity <= size * 100 / 75;
     }
 
     private void checkIndexWithEqual(int index) {
@@ -113,9 +115,7 @@ public class AstArrayList<E> implements AstList<E>{
     }
 
     private void shift(int index) {
-        for (int i = index; i < size - 1; i++) {
-            array[i] = array[i + 1];
-        }
+        System.arraycopy(array, index + 1, array, index, size - 1 - index);
         size--;
         array[size] = null;
     }
